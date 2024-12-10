@@ -1,0 +1,6 @@
+ffmpeg-python
+google-cloud-speech
+openai-whisper
+SpeechRecognition
+moviepy
+torch
