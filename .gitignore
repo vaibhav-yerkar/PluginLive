@@ -1,1 +1,3 @@
 virtualenv
+.env
+backend/src/models/test.ipynb

@@ -4,3 +4,7 @@ openai-whisper
 SpeechRecognition
 moviepy
 torch
+
+fastapi
+uvicorn
+google-generativeai
