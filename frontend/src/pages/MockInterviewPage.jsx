@@ -1,5 +1,6 @@
 import DefaultHOC from "../layout/Default.HOC";
 import React, { useState, useRef } from "react";
+import { getUserName } from "../utils/auth";
 
 const questionBank = [
   { id: 1, question: "Tell us about yourself?" },
@@ -142,7 +143,14 @@ function MockInterviewPage() {
     setIsPaused(false);
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
+    let userName = getUserName();
+    let timestamp =
+      new Date().toISOString().slice(0, 10).replace(/-/g, "").slice(0, -4) +
+      "-" +
+      new Date().toTimeString().split(" ")[0].replace(/:/g, ""); // YYYYMMDD-HHmmss
+    const fileName = `${userName}_${timestamp}.webm`;
+
     let questionAnswered;
     if (selectedQuestion !== "5") {
       const questionObj = questionBank.find(
@@ -154,8 +162,26 @@ function MockInterviewPage() {
     } else {
       questionAnswered = customQuestion;
     }
-    console.log("Upload video:", videoUrl);
-    console.log(questionAnswered);
+    const videoBlob = await fetch(videoUrl).then((res) => res.blob());
+
+    const renamedVideoFile = new File([videoBlob], newFileName, {
+      type: videoBlob.type,
+    });
+    const formData = new FormData();
+    formData.append("video", renamedVideoFile);
+    formData.append("question", questionToUpload);
+
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      console.log("Video and question uploaded successfully!");
+    } else {
+      console.error("Failed to upload video and question");
+    }
+
     setIsModalOpen(false);
   };
 

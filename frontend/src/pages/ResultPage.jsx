@@ -21,7 +21,7 @@ function ResultPage() {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <h1 className="text-3xl font-bold mb-4">Report</h1>
-      <div className="bg-white shadow p-4 rounded">
+      <div className="bg-white shadow p-4 rounded mb-6">
         <h2 className="text-xl font-bold">Interview Results</h2>
         <p>Date: {report.date}</p>
         <p>Score: {report.score}</p>
@@ -34,6 +34,12 @@ function ResultPage() {
         >
           Download Report
         </a>
+      </div>
+
+      {/* Report Summary Section */}
+      <div className="bg-white shadow p-4 rounded">
+        <h2 className="text-xl font-bold mb-2">Report Summary</h2>
+        <p>{report.summary || "No summary available for this report."}</p>
       </div>
     </div>
   );
