@@ -1,0 +1,17 @@
+ffmpeg-python
+google-cloud-speech
+openai-whisper
+SpeechRecognition
+moviepy
+torch
+
+fastapi
+uvicorn
+google-generativeai
+
+
+Langchain_core
+langchain_community
+Langserve
+groq
+langchain-groq
